@@ -21,7 +21,8 @@ class BotOfShadows:
         if msg is not None:
             requests.get(url)
 
-    def read_token_from_config_file(self, config):
+    @staticmethod
+    def read_token_from_config_file(config, value='token'):
         parser = cfg.ConfigParser()
         parser.read(config)
-        return parser.get('creds', 'token')
+        return parser.get('creds', value)

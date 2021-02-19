@@ -1,10 +1,12 @@
 import requests
 
+from bot_of_shadows import BotOfShadows
+
 
 class Halliwell:
 
-    def __init__(self):
-        self.base_url = 'https://hw.htech.mx/'
+    def __init__(self, config):
+        self.base_url = BotOfShadows.read_token_from_config_file(config, 'url')
 
     def tirar(self, tirada, telegram_id):
         personaje = False

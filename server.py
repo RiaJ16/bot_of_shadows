@@ -4,7 +4,7 @@ from halliwell import Halliwell
 from bot_of_shadows import BotOfShadows
 
 bot_of_shadows = BotOfShadows("config.cfg")
-halliwell = Halliwell()
+halliwell = Halliwell("config.cfg")
 
 
 def make_reply(msg, nombre_, telegram_id_, tipo_):
@@ -33,4 +33,4 @@ while True:
                 telegram_id = item["message"]["from"]["id"]
                 reply = make_reply(message, nombre, telegram_id, tipo)
                 bot_of_shadows.send_message(reply, from_)
-    time.sleep(1)
+    time.sleep(0.5)
