@@ -102,6 +102,14 @@ class Halliwell:
                         respuesta = self.personaje_asignado(telegram_id)
                     finally:
                         respuesta = f"{respuesta} <b>{nombre}</b>."
+                elif comando == 'hola':
+                    respuesta = f"Hola, {nombre}, no he aprendido una respuesta personalizada para ti"
+                    if telegram_id == 90783987:
+                        respuesta = f"Hola, amo y creador Jair"
+                    elif telegram_id == 38114961:
+                        respuesta = f"Hola, master corrupto Erik"
+                    elif telegram_id == 101807242:
+                        respuesta = f"Hola a ti, Venenosa :)"
                 elif comando == 'ayuda':
                     respuesta = "Hola, estás accediendo a la ayuda de este bot."
         return respuesta
