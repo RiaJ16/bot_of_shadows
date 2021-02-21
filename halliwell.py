@@ -118,7 +118,7 @@ class Halliwell:
     def estilizar(respuesta, nombre, tipo, simple=False):
         reply, personaje = respuesta
         if not simple:
-            if tipo == 'group' or tipo == 'public':
+            if tipo == 'group' or tipo == 'supergroup':
                 indicacion = f"<pre>Resultado de la tirada de {nombre}"
                 if personaje:
                     indicacion = f"{indicacion} ({personaje})"
