@@ -75,27 +75,35 @@ class Halliwell:
 
     def roll(self, cadena, nombre):
         try:
-            dados, caras = cadena.split('d')
-            dados = int(dados)
-            caras = int(caras)
+            tiradas = cadena.split("+")
+            respuesta = ''
             suma = 0
-            respuesta = '('
-            for dado in range(0, dados):
-                resultado = random.randint(1, caras)
-                suma += resultado
-                tipo = 0
-                if resultado == caras:
-                    tipo = 1
-                elif resultado == 1:
-                    tipo = 2
-                resultado = self.procesar_tipo(resultado, tipo)
-                respuesta = f"{respuesta}{resultado} + "
-            respuesta = f"{respuesta.rstrip('+ ')}) = <b>{suma}</b>"
-            respuesta = respuesta.replace('+', '%2b')
+            for tirada in tiradas:
+                try:
+                    dados = int(tirada.split('d')[0])
+                    caras = int(tirada.split('d')[1])
+                    respuesta = f"{respuesta}("
+                    for dado in range(0, dados):
+                        resultado = random.randint(1, caras)
+                        suma += resultado
+                        tipo = 0
+                        if resultado == caras:
+                            tipo = 1
+                        elif resultado == 1:
+                            tipo = 2
+                        resultado = self.procesar_tipo(resultado, tipo)
+                        respuesta = f"{respuesta}{resultado} + "
+                    respuesta = f"{respuesta.rstrip('+ ')}) + "
+                except IndexError:
+                    suma += dados
+                    respuesta = f"{respuesta}{dados} + "
+            respuesta = f"{respuesta.rstrip(' + ')} = <b>{suma}</b>"
             respuesta = f"<pre>Resultado de la tirada de {nombre}" \
                         f" ({cadena}):</pre>\n{respuesta}"
+            respuesta = respuesta.replace('+', '%2b')
         except ValueError:
-            respuesta = f"Ha ocurrido un error, <b>{nombre}</b>."
+            respuesta = f"Ha ocurrido un error, <b>{nombre}</b>." \
+                        f" Revisa el formato de la tirada."
         return respuesta
 
     @staticmethod
