@@ -1,3 +1,4 @@
+import random
 import requests
 
 from bot_of_shadows import BotOfShadows
@@ -72,6 +73,31 @@ class Halliwell:
         except requests.exceptions.ConnectionError:
             return ''
 
+    def roll(self, cadena, nombre):
+        try:
+            dados, caras = cadena.split('d')
+            dados = int(dados)
+            caras = int(caras)
+            suma = 0
+            respuesta = '('
+            for dado in range(0, dados):
+                resultado = random.randint(1, caras)
+                suma += resultado
+                tipo = 0
+                if resultado == caras:
+                    tipo = 1
+                elif resultado == 1:
+                    tipo = 2
+                resultado = self.procesar_tipo(resultado, tipo)
+                respuesta = f"{respuesta}{resultado} + "
+            respuesta = f"{respuesta.rstrip('+ ')}) = <b>{suma}</b>"
+            respuesta = respuesta.replace('+', '%2b')
+            respuesta = f"<pre>Resultado de la tirada de {nombre}" \
+                        f" ({cadena}):</pre>\n{respuesta}"
+        except ValueError:
+            respuesta = f"Ha ocurrido un error, <b>{nombre}</b>."
+        return respuesta
+
     @staticmethod
     def procesar_tipo(base, tipo):
         if tipo == 1:
@@ -102,6 +128,11 @@ class Halliwell:
                         respuesta = self.personaje_asignado(telegram_id)
                     finally:
                         respuesta = f"{respuesta} <b>{nombre}</b>."
+                elif comando == 'roll':
+                    try:
+                        respuesta = self.roll(mensaje.split()[1], nombre)
+                    except IndexError:
+                        respuesta = self.roll("1d10", nombre)
                 elif comando == 'hola':
                     respuesta = f"Hola, {nombre}, no he aprendido una respuesta personalizada para ti"
                     if telegram_id == 90783987:
