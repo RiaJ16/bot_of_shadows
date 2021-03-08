@@ -82,6 +82,8 @@ class Halliwell:
                 try:
                     dados = int(tirada.split('d')[0])
                     caras = int(tirada.split('d')[1])
+                    if dados > 1000 or caras > 9999:
+                        raise OverflowError
                     respuesta = f"{respuesta}("
                     for dado in range(0, dados):
                         resultado = random.randint(1, caras)
@@ -97,6 +99,8 @@ class Halliwell:
                 except IndexError:
                     suma += dados
                     respuesta = f"{respuesta}{dados} + "
+            if len(respuesta) >= 4000:
+                respuesta = ""
             respuesta = f"{respuesta.rstrip(' + ')} = <b>{suma}</b>"
             respuesta = f"<pre>Resultado de la tirada de {nombre}" \
                         f" ({cadena}):</pre>\n{respuesta}"
@@ -104,6 +108,9 @@ class Halliwell:
         except ValueError:
             respuesta = f"Ha ocurrido un error, <b>{nombre}</b>." \
                         f" Revisa el formato de la tirada."
+        except OverflowError:
+            respuesta = f"Ha ocurrido un error, <b>{nombre}</b>." \
+                        f" Ingresa una tirada más realista, pl0x."
         return respuesta
 
     @staticmethod
