@@ -149,7 +149,6 @@ class Halliwell:
                     except IndexError:
                         respuesta = self.roll("1d10", nombre)
                 elif comando == 'hola':
-                    print(nombre, telegram_id)
                     respuesta = f"Hola, {nombre}, no he aprendido una respuesta personalizada para ti"
                     if telegram_id == 90783987:
                         respuesta = f"Hola, amo y creador Jair"
