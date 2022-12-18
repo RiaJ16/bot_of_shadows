@@ -164,8 +164,12 @@ class Halliwell:
                         respuesta = f"Hola, Prisca, ayudante corrupta del master corrupto"
                 elif comando == 'ayuda':
                     respuesta = "Hola, estás accediendo a la ayuda de este bot."
-                elif comando == 'good bot':
-                    respuesta = f"Good {nombre}."
+                elif comando == 'good':
+                    try:
+                        if mensaje.split()[1].lower() == "bot":
+                            respuesta = f"Good {nombre}."
+                    except IndexError:
+                        respuesta = "Good what?"
         return respuesta
 
     @staticmethod
