@@ -164,6 +164,8 @@ class Halliwell:
                         respuesta = f"Hola, Prisca, ayudante corrupta del master corrupto"
                 elif comando == 'ayuda':
                     respuesta = "Hola, estás accediendo a la ayuda de este bot."
+                elif comando == 'good bot':
+                    respuesta = f"Good {nombre}."
         return respuesta
 
     @staticmethod
