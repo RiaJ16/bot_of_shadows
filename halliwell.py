@@ -170,6 +170,12 @@ class Halliwell:
                             respuesta = f"Good {nombre}."
                     except IndexError:
                         respuesta = "Good what?"
+                elif comando == 'bad':
+                    try:
+                        if mensaje.split()[1].lower() == "bot":
+                            respuesta = ":("
+                    except IndexError:
+                        respuesta = "Bad what?"
         return respuesta
 
     @staticmethod
