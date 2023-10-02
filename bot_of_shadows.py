@@ -16,8 +16,10 @@ class BotOfShadows:
         r = requests.get(url)
         return json.loads(r.content)
 
-    def send_message(self, msg, chat_id):
+    def send_message(self, msg, chat_id, topic=None):
         url = self.base + f"sendMessage?chat_id={chat_id}&text={msg}&parse_mode=html"
+        if topic:
+            url = url + f"&topic={topic}"
         if msg is not None:
             requests.get(url)
 

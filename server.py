@@ -27,13 +27,17 @@ while True:
                     message = str(item["message"]["text"])
                 except (KeyError, IndexError):
                     message = None
+                try:
+                    topic = str(item["message"]["message_thread_id"])
+                except (KeyError, IndexError):
+                    topic = None
                 if message:
                     tipo = item["message"]["chat"]["type"]
                     from_ = item["message"]["chat"]["id"]
                     nombre = item["message"]["from"]["first_name"]
                     telegram_id = item["message"]["from"]["id"]
                     reply = make_reply(message, nombre, telegram_id, tipo)
-                    bot_of_shadows.send_message(reply, from_)
+                    bot_of_shadows.send_message(reply, from_, topic)
         time.sleep(0.5)
     except KeyError:
         pass
